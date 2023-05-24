@@ -1,18 +1,17 @@
 #include "monty.h"
 
 /**
- * free_stack - function to remove stack from memory
+ * free_mem_stack - function to remove stack from memory
  * @stack: the stack
  */
-void free_stack(stack_t *stack)
+void free_mem_stack(stack_t *stack)
 {
-	stack_t *c_stack = stack;
+	stack_t *c_stack;
 
-	while (c_stack)
+	while (stack)
 	{
-		stack_t *x = c_stack;
-
-		c_stack = c_stack->next;
-		free(x);
+		c_stack = stack->next;
+		free(stack);
+		stack = c_stack;
 	}
 }

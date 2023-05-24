@@ -5,19 +5,21 @@
  * @strng: the string character passed
  * Return: 1 if integer else 0
  */
-int check_integer(const char *strng)
+int check_integer(char *strng)
 {
+	int j = 0;
+
 	if (!strng)
 		return (0);
-	if (*strng == '-' || *strng == '+')
-		strng++;
-	if (*strng == '\0')
-		return (0);
-	while (*strng)
+	if (strng[j] == '-')
+		j++;
+	if (*(strng + j) != '\0')
 	{
-		if (!isdigit((unsigned char)*strng))
+		if (*(strng + j) >= '0' && *(strng + j) <= '9')
+			j++;
+		else
 			return (0);
-		strng++;
-	}
+	} else
+		return (0);
 	return (1);
 }

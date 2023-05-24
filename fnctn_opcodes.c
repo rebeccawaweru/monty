@@ -15,70 +15,54 @@ char *nextArg(char *line)
 	if (line[j] != '\0')
 	{
 		argument = &line[j];
-		while (line[j] != ' '  && line[j] != '\t' && line[j] != '\n' && line[j] != '\0')
+		while (line[j] != ' '  && line[j] != '\t'
+		&& line[j] != '\n' && line[j] != '\0')
 			j++;
 		line[j] = '\0';
 	}
-	return argument;
+	return (argument);
 }
 
 /**
  * push - function to add element to stack
  * @stack: the stack
- * @num_line: line number in the monty byte code file
- * @line: the line
+ * @line_number: line number in the monty byte code file
  */
-void push(stack_t **stack, unsigned int num_line, char *line)
+void push(stack_t **stack, unsigned int line_number)
 {
-	int val = 0;
-	char *argument = NULL;
 	stack_t *fresh_node = NULL;
 
-	/*check for argument*/
-	if (!num_line || !stack)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", num_line);
-		exit(EXIT_FAILURE);
-	}
-	argument = nextArg(line);
-	if (!argument)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", num_line);
-		exit(EXIT_FAILURE);
-	}
-	if (!check_integer(argument))
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", num_line);
-		exit(EXIT_FAILURE);
-	}
-	val = atoi(argument);
-	if (val == 0 && argument[0] != '0')
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", num_line);
-		exit(EXIT_FAILURE);
-	}
+	(void) line_number;
 	fresh_node = malloc(sizeof(stack_t));
 	if (!fresh_node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	fresh_node->n = val;
+	fresh_node->n = v_global;
 	fresh_node->prev = NULL;
+	if (*stack == NULL)
+	{
+		fresh_node->next = NULL;
+		*stack = fresh_node;
+		return;
+	}
 	fresh_node->next = *stack;
-	if (*stack)
-		(*stack)->prev = fresh_node;
+	(*stack)->prev = fresh_node;
 	*stack = fresh_node;
 }
 
 /**
  * pall - function to print all values on the stack
  * @stack: the stack
+ * @line_number: line number
  */
-void pall(stack_t **stack)
+void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *c_stack = *stack;
-	if (!stack)
+
+	(void) line_number;
+	if (*(stack) == NULL)
 		return;
 	while (c_stack)
 	{

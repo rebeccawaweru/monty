@@ -4,7 +4,7 @@
  * main - entry point
  * @argc: number of arguments
  * @argv: holds the arguments
- * Return: exit status
+ * Return: 0 on success else 1
  */
 int main(int argc, char *argv[])
 {
@@ -15,13 +15,11 @@ int main(int argc, char *argv[])
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
-	}
-	if (!file)
+	} else if (!file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", name);
 		exit(EXIT_FAILURE);
-	}
-	bytecode_exec(file);
-	fclose(file);
+	} else
+		bytecode_exec(file);
 	return (EXIT_SUCCESS);
 }

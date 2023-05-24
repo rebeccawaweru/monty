@@ -6,8 +6,12 @@
 #include <string.h>
 #include <ctype.h>
 
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
 #define DELIMETER " \t\n"
 #define MAX_LENGTH 256
+extern int v_global;
+int v_global;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -39,11 +43,13 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void push(stack_t **stack, unsigned int num_line, char *line);
-void pall(stack_t **stack);
-int check_integer(const char *strng);
-void free_stack(stack_t *stack);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+int check_integer(char *strng);
+void free_mem_stack(stack_t *stack);
 void bytecode_exec(FILE *file);
+void op_instruction(char *input, stack_t **stack, unsigned int line_number);
 char *nextArg(char *line);
+char *token_acq(char *line, unsigned int num_line);
 
 #endif
