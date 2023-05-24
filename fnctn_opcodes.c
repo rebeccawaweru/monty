@@ -1,29 +1,6 @@
 #include "monty.h"
 
 /**
- * nextArg - function to get next argument
- * @line: the line
- * Return: argument
- */
-char *nextArg(char *line)
-{
-	char *argument = NULL;
-	int j = 0;
-
-	while (line[j] == ' ' || line[j] == '\t')
-		j++;
-	if (line[j] != '\0')
-	{
-		argument = &line[j];
-		while (line[j] != ' '  && line[j] != '\t'
-		&& line[j] != '\n' && line[j] != '\0')
-			j++;
-		line[j] = '\0';
-	}
-	return (argument);
-}
-
-/**
  * push - function to add element to stack
  * @stack: the stack
  * @line_number: line number in the monty byte code file
@@ -111,9 +88,27 @@ void pop(stack_t **stack, unsigned int line_number)
 	free(c_stack);
 }
 
+/**
+ * swap - switch two elements at the top of the stack
+ * @stack: the stack
+ * @line_number: the line number
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *lead = NULL;
+	stack_t *follow = NULL;
 
+	lead = *stack;
+	if (lead == NULL || lead->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	follow = (*stack)->next;
+	lead->prev = follow;
+	follow->prev = NULL;
+	lead->next = follow->next;
+	follow->next = lead;
 
-
-
-
-
+	*stack = follow;
+}
