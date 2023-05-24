@@ -46,6 +46,8 @@ typedef struct instruction_s
 
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
 int check_integer(char *strng);
 void free_mem_stack(stack_t *stack);
 void bytecode_exec(FILE *file);

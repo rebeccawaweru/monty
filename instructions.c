@@ -14,6 +14,8 @@ void op_instruction(char *input, stack_t **stack, unsigned int line_number)
 	instruction_t get_instrct[] = {
 		{"push", push},
 		{"pull", pall},
+		{"pint", pint},
+		{"pop", pop},
 		{NULL, NULL}
 	};
 	if (get_instrct[x].opcode != NULL)
