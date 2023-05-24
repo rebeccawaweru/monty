@@ -6,6 +6,9 @@
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
