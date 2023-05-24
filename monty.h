@@ -55,9 +55,11 @@ void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 int check_integer(char *strng);
+char *parse(char *input, stack_t **stack, unsigned int num_line);
 void free_mem_stack(stack_t *stack);
-void bytecode_exec(FILE *file);
-void op_instruction(char *input, stack_t **stack, unsigned int line_number);
+void bytecode_exec(FILE *file, stack_t **stack);
+typedef void(*fc_instrct)(stack_t **stack, unsigned int line_number);
+fc_instrct op_instruction(char *strng);
 char *nextArg(char *line);
 char *token_acq(char *line, unsigned int num_line);
 
