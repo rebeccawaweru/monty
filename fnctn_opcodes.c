@@ -31,6 +31,7 @@ char *nextArg(char *line)
 void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *fresh_node = NULL;
+	int v_global = 0;
 
 	(void) line_number;
 	fresh_node = malloc(sizeof(stack_t));

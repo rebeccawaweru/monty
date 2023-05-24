@@ -5,13 +5,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 #define DELIMETER " \t\n"
 #define MAX_LENGTH 256
+
 extern int v_global;
-int v_global;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
