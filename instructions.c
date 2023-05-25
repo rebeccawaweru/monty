@@ -21,6 +21,9 @@ int op_instruction(char *c, stack_t **stack,
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+		{"sub", subtraction},
+		{"div", division},
+		{"mul", multiplication},
 		{NULL, NULL}
 	};
 	code = strtok(c, " \n\t");

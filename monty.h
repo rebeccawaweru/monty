@@ -10,13 +10,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#define _POSIX_C_SOURCE 200809L
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 #define DELIMETER " \t\n"
 #define MAX_LENGTH 256
-
-extern int v_global;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -74,6 +71,9 @@ void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
+void subtraction(stack_t **stack, unsigned int line_number);
+void division(stack_t **stack, unsigned int line_number);
+void multiplication(stack_t **stack, unsigned int line_number);
 int check_integer(char *strng);
 char *parse(char *input, stack_t **stack, unsigned int num_line);
 void free_mem_stack(stack_t *stack);
