@@ -17,19 +17,23 @@ int op_instruction(char *c, stack_t **stack,
 
 	instruction_t get_instrct[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", add},
-		{"nop", nop},
-		{"sub", subtraction},
+		{"pop", pop}, {"swap", swap}, {"add", add},
+		{"nop", nop}, {"sub", subtraction},
 		{"div", division},
 		{"mul", multiplication},
+		{"mod", modular},
+		{"pchar", prntchar},
+		{"pstr", prntstrng},
+		{"rotl", rotatetop},
+		{"rotr", rotatebottom},
 		{NULL, NULL}
 	};
-	code = strtok(c, " \n\t");
+	code = strtok(c, DELIMETER);
 	if (code && code[0] == '#')
-		return (0);
-	carrier.argument = strtok(NULL, " \n\t");
+	{
+		;
+	}
+	carrier.argument = strtok(NULL, DELIMETER);
 	while (get_instrct[x].opcode && code)
 	{
 		if (strcmp(code, get_instrct[x].opcode) == 0)

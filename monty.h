@@ -74,6 +74,12 @@ void nop(stack_t **stack, unsigned int line_number);
 void subtraction(stack_t **stack, unsigned int line_number);
 void division(stack_t **stack, unsigned int line_number);
 void multiplication(stack_t **stack, unsigned int line_number);
+void modular(stack_t **stack, unsigned int line_number);
+void prntchar(stack_t **stack, unsigned int line_number);
+void prntstrng(stack_t **stack, unsigned int line_number);
+void rotatetop(stack_t **stack, unsigned int line_number);
+void rotatebottom(stack_t **stack, unsigned int line_number);
+
 int check_integer(char *strng);
 char *parse(char *input, stack_t **stack, unsigned int num_line);
 void free_mem_stack(stack_t *stack);
