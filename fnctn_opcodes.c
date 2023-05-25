@@ -7,27 +7,38 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *fresh_node = NULL;
-	int v_global = 0;
+	int a, b = 0, fg = 0;
 
-	(void) line_number;
-	fresh_node = malloc(sizeof(stack_t));
-	if (!fresh_node)
+	if (carrier.argument)
 	{
-		fprintf(stderr, "Error: malloc failed\n");
+		if (carrier.argument[0] == '-')
+			b++;
+		for (; carrier.argument[b] != '\0'; b++)
+		{
+			if (carrier.argument[b] > 57 || carrier.argument[b] < 48)
+				fg = 1;
+		}
+		if (fg == 1)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			fclose(carrier.f);
+			free(carrier.c);
+			free_mem_stack(*stack);
+			exit(EXIT_FAILURE);
+		}
+	} else
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		fclose(carrier.f);
+		free(carrier.c);
+		free_mem_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
-	fresh_node->n = v_global;
-	fresh_node->prev = NULL;
-	if (*stack == NULL)
-	{
-		fresh_node->next = NULL;
-		*stack = fresh_node;
-		return;
-	}
-	fresh_node->next = *stack;
-	(*stack)->prev = fresh_node;
-	*stack = fresh_node;
+	a = atoi(carrier.argument);
+	if (carrier.flg == 0)
+		startplus(stack, a);
+	else
+		queueplus(stack, a);
 }
 
 /**

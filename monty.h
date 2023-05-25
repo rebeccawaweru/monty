@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#define _POSIX_C_SOURCE 200809L
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 #define DELIMETER " \t\n"
@@ -47,6 +48,25 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct global_v - variables
+ * @argument: arguments
+ * @f: monty file
+ * @c: contents of a line
+ * @flg: flag
+ * Description: pass values 
+ */
+typedef struct global_v
+{
+	char *argument;
+	FILE *f;
+	char *c;
+	int flg;
+} global_t;
+extern global_t carrier;
+
+void startplus(stack_t **top, int val);
+void queueplus(stack_t **top, int val);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
@@ -59,7 +79,7 @@ char *parse(char *input, stack_t **stack, unsigned int num_line);
 void free_mem_stack(stack_t *stack);
 void bytecode_exec(FILE *file, stack_t **stack);
 typedef void(*fc_instrct)(stack_t **stack, unsigned int line_number);
-fc_instrct op_instruction(char *strng);
+int op_instruction(char *c, stack_t **stack, unsigned int line_counter, FILE *f);
 char *nextArg(char *line);
 char *token_acq(char *line, unsigned int num_line);
 
