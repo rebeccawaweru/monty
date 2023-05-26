@@ -30,9 +30,7 @@ int op_instruction(char *c, stack_t **stack,
 	};
 	code = strtok(c, DELIMETER);
 	if (code && code[0] == '#')
-	{
-		;
-	}
+		return (0);
 	carrier.argument = strtok(NULL, DELIMETER);
 	while (get_instrct[x].opcode && code)
 	{

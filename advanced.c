@@ -32,15 +32,12 @@ void modular(stack_t **stack, unsigned int line_number)
  */
 void prntchar(stack_t **stack, unsigned int line_number)
 {
-	stack_t *c_stack = NULL;
-
-	c_stack = *stack;
-	if (c_stack->next == NULL)
+	if ((*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	while (c_stack->next->n > 127 || c_stack->next->n < 0)
+	while ((*stack)->next->n > 127 || (*stack)->next->n < 0)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 		exit(EXIT_FAILURE);
@@ -53,11 +50,9 @@ void prntchar(stack_t **stack, unsigned int line_number)
  */
 void prntstrng(stack_t **stack, unsigned int line_number)
 {
-	stack_t *c_stack = NULL;
+	stack_t *c_stack = (*stack)->next;
 
 	(void)line_number;
-
-	c_stack = (*stack)->next;
 	if ((c_stack->n > 0 && c_stack->n <= 127) && c_stack && c_stack->n != 0)
 	{
 		printf("%c", c_stack->n);
@@ -72,20 +67,18 @@ void prntstrng(stack_t **stack, unsigned int line_number)
  */
 void rotatetop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *lead = NULL;
-	stack_t *finish = NULL;
-	stack_t *c_stack = NULL;
+	stack_t *lead;
+	stack_t *finish;
 
 	(void)line_number;
-	c_stack = (*stack)->next;
-	if (c_stack == NULL || c_stack->next == NULL)
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 		return;
-	lead = c_stack;
-	finish = c_stack;
+	lead = (*stack)->next;
+	finish = (*stack)->next;
 	if (finish->next != NULL)
 		finish = finish->next;
 	lead->next->prev = *stack;
-	c_stack = lead->next;
+	(*stack) = lead->next;
 	finish->next = lead;
 	lead->next = NULL;
 	lead->next = finish;
@@ -97,20 +90,18 @@ void rotatetop(stack_t **stack, unsigned int line_number)
  */
 void rotatebottom(stack_t **stack, unsigned int line_number)
 {
-	stack_t *lead = NULL;
-	stack_t *finish = NULL;
-	stack_t *c_stack = NULL;
+	stack_t *lead;
+	stack_t *finish;
 
 	(void)line_number;
-	c_stack = (*stack)->next;
-	if (c_stack == NULL || c_stack->next == NULL)
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 		return;
-	lead = c_stack;
-	finish = c_stack;
+	lead = (*stack)->next;
+	finish = (*stack)->next;
 	if (finish->next != NULL)
 		finish = finish->next;
 	finish->prev->next = NULL;
-	c_stack = finish;
+	(*stack)->next = finish;
 	finish->prev = *stack;
 	finish->next = lead;
 	lead->prev = finish;
